@@ -29,8 +29,10 @@
         "dbaeumer",
         "eamodio",
         "esbenp",
+        "failreason",
         "formulahendry",
         "gitlens",
+        "holdreason",
         "kohler",
         "sourcemap"
     ]

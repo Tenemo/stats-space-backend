@@ -21,3 +21,6 @@ temp/
 
 # Logs
 logs/
+
+# Data import
+scripts/partial/*.json

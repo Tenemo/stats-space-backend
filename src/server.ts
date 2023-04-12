@@ -1,5 +1,4 @@
-import express from 'express'; // ErrorRequestHandler
-// import {ErrorRequestHandler } from 'express';
+import express, { ErrorRequestHandler } from 'express';
 import cookieParser from 'cookie-parser';
 import { router } from 'routes/router';
 import { config } from './config';
@@ -17,27 +16,21 @@ app.use(
 );
 app.use(cookieParser());
 
-const {
-    errorLogger,
-    logger,
-    // sentryErrorHandler
-} = setupLogging(app);
+const { errorLogger, logger, sentryErrorHandler } = setupLogging(app);
 
 app.use('/api', router);
 
 // The error handler must be BEFORE any other error middleware and AFTER all controllers
-// app.use(sentryErrorHandler);
+app.use(sentryErrorHandler);
 
 // Optional fallthrough error handler
-// const onErrorSentry: ErrorRequestHandler = (_err, _req, res) => {
-//     // The error id is attached to `res.sentry` to be returned
-//     // and optionally displayed to the user for support.
-//     res.statusCode = 500;
-//     // @ts-ignore
-//     res.end((res.sentry as string) + '\n');
-// };
+const onErrorSentry: ErrorRequestHandler = (_err, _req, res) => {
+    res.statusCode = 500;
+    // @ts-ignore
+    res.end((res.sentry as string) + '\n');
+};
 
-// app.use(onErrorSentry);
+app.use(onErrorSentry);
 
 // express-winston errorLogger AFTER the router and AFTER sentry.
 app.use(errorLogger);

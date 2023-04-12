@@ -25,6 +25,7 @@
         "dev:ts": "ts-node --transpile-only src/server.ts",
         "eslint": "eslint . --ext js,ts",
         "eslint:fix": "eslint . --ext js,ts --fix",
+        "space-data-import": "ts-node --transpile-only scripts/spaceDataImport.ts",
         "postinstall": "husky install",
         "tsc": "tsc",
         "test": "cross-env NODE_ENV=test jest --passWithNoTests",
@@ -32,7 +33,10 @@
         "test:watch": "npm run test -- --watch"
     },
     "dependencies": {
+        "@sentry/node": "^7.47.0",
+        "@sentry/tracing": "^7.47.0",
         "@sinclair/typebox": "^0.27.3",
+        "axios": "^1.3.5",
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "cross-env": "^7.0.3",

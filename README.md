@@ -1,9 +1,11 @@
-# stats-space-backend
+## stats-space-backend
 
-## Deployment
+Backend for [stats.space](https://stats.space)
+
+### Deployment
 
 Heroku
 
-## Error logging
+### Error logging
 
 Sentry.io
