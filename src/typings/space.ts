@@ -5,6 +5,24 @@ export type LaunchResponse = {
     results: Launch[];
 };
 
+export type LaunchServiceProvider = {
+    id: number;
+    url: string;
+    name: string;
+    featured: boolean;
+    type: string;
+    country_code: string;
+    abbrev: string;
+    description: string;
+    administrator: null | string;
+    founding_year: string;
+    launchers: string;
+    spacecraft: string;
+    parent: null | string;
+    image_url: null | string;
+    logo_url: null | string;
+};
+
 export type Launch = {
     id: string;
     url: string;
@@ -15,17 +33,17 @@ export type Launch = {
     net: string;
     window_end: string;
     window_start: string;
-    probability: null;
+    probability: number;
     holdreason: string;
     failreason: string;
-    hashtag: null;
+    hashtag: string;
     launch_service_provider: Agency;
     rocket: Rocket;
     mission: Mission;
     pad: Pad;
     webcast_live: boolean;
     image: string;
-    infographic: null;
+    infographic: string;
     program: unknown[];
     orbital_launch_attempt_count: number;
     location_launch_attempt_count: number;
@@ -69,7 +87,7 @@ export type Mission = {
     id: number;
     name: string;
     description: string;
-    launch_designator: null;
+    launch_designator: string;
     type: string;
     orbit: Orbit;
 };
@@ -83,9 +101,9 @@ export type Orbit = {
 export type Pad = {
     id: number;
     url: string;
-    agency_id: null;
+    agency_id: number;
     name: string;
-    info_url: null;
+    info_url: string;
     wiki_url: string;
     map_url: string;
     latitude: string;
