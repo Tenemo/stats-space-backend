@@ -159,7 +159,7 @@ export const initLaunchModel = (sequelize: Sequelize): typeof LaunchModel => {
             sequelize,
             tableName: 'launch',
             freezeTableName: true,
-            timestamps: true,
+            timestamps: false,
         },
     );
 

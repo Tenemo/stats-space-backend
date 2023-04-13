@@ -25,3 +25,4 @@ logs/
 # Data import
 scripts/partial/*.json
 scripts/output/*.json
+WDIData.csv

@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize';
 import { config } from './config';
 import { initLaunchModel, insertLaunches } from 'models/launch.model';
+import { initGDPModel, insertGDPData } from 'models/gdp.model';
 
 export const sequelize = new Sequelize(
     config.postgres.database,
@@ -40,14 +41,16 @@ sequelize
     });
 
 export const launch = initLaunchModel(sequelize);
+export const gdp = initGDPModel(sequelize);
 
 sequelize
     .sync({ force: true }) // Dropping the table each time
     .then(() => {
         console.log('Database synchronized');
     })
-    .then(() => {
-        return insertLaunches(sequelize, launch);
+    .then(async () => {
+        await insertLaunches(sequelize, launch);
+        await insertGDPData(sequelize, gdp);
     })
     .catch((err) => {
         console.log('Rolled back, an error occurred:');

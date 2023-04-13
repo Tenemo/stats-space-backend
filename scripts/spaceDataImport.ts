@@ -100,7 +100,7 @@ void (async () => {
         ),
         'utf8',
     );
-    console.log(`\nRaw data in JSON saved to: output/${filename}`);
+    console.log(`\nSpace data in JSON saved to: output/${filename}`);
     console.log(
         `\nTook ${((performance.now() - startTime) / 1000).toFixed(
             2,
