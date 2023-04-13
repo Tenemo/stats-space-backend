@@ -65,6 +65,7 @@ export type LaunchShort = {
     launch_service_provider_name: string;
     launch_service_provider_type: string;
     launch_service_provider_country_code: string;
+    launch_service_provider_country: string;
     rocket_configuration_family: string;
     mission_name: string;
     mission_description: string;
@@ -74,6 +75,7 @@ export type LaunchShort = {
     pad_map_url: string;
     pad_location_name: string;
     pad_location_country_code: string;
+    pad_location_country: string;
 };
 
 export type Status = {

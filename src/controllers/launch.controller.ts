@@ -3,6 +3,13 @@ import { Op, WhereOptions } from 'sequelize';
 import { LaunchShort } from 'typings/space';
 import { launch } from 'database';
 
+import countryCodes from 'data/country_codes.json';
+
+const countryCodesMap: Record<string, string> = countryCodes.reduce(
+    (acc, { name, countryCode }) => ({ ...acc, [countryCode]: name }),
+    {},
+);
+
 type LaunchWhereConditions = WhereOptions & {
     status_abbrev?: string;
     window_start?: {
@@ -56,6 +63,10 @@ export const getLaunches = async (
                     launch.launch_service_provider_type,
                 launch_service_provider_country_code:
                     launch.launch_service_provider_country_code,
+                launch_service_provider_country:
+                    countryCodesMap[
+                        launch.launch_service_provider_country_code
+                    ],
                 rocket_configuration_family: launch.rocket_configuration_family,
                 mission_name: launch.mission_name,
                 mission_description: launch.mission_description,
@@ -65,6 +76,8 @@ export const getLaunches = async (
                 pad_map_url: launch.pad_map_url,
                 pad_location_name: launch.pad_location_name,
                 pad_location_country_code: launch.pad_location_country_code,
+                pad_location_country:
+                    countryCodesMap[launch.pad_location_country_code],
             };
 
             if (acc[year]) {
