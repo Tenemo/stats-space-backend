@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Op, WhereOptions } from 'sequelize';
-
+import { LaunchShort } from 'typings/space';
 import { launch } from 'database';
 
 type LaunchWhereConditions = WhereOptions & {
@@ -41,49 +41,44 @@ export const getLaunches = async (
             where: whereConditions,
         });
 
+        const launchesByYear = launches.reduce((acc, launch) => {
+            const year = new Date(launch.window_start).getFullYear();
+            const launchData: LaunchShort = {
+                id: launch.id,
+                url: launch.url,
+                slug: launch.slug,
+                name: launch.name,
+                status_abbrev: launch.status_abbrev,
+                window_start: launch.window_start,
+                launch_service_provider_name:
+                    launch.launch_service_provider_name,
+                launch_service_provider_type:
+                    launch.launch_service_provider_type,
+                launch_service_provider_country_code:
+                    launch.launch_service_provider_country_code,
+                rocket_configuration_family: launch.rocket_configuration_family,
+                mission_name: launch.mission_name,
+                mission_description: launch.mission_description,
+                pad_url: launch.pad_url,
+                pad_name: launch.pad_name,
+                pad_wiki_url: launch.pad_wiki_url,
+                pad_map_url: launch.pad_map_url,
+                pad_location_name: launch.pad_location_name,
+                pad_location_country_code: launch.pad_location_country_code,
+            };
+
+            if (acc[year]) {
+                acc[year].push(launchData);
+            } else {
+                acc[year] = [launchData];
+            }
+
+            return acc;
+        }, {} as Record<string, LaunchShort[]>);
+
         res.json({
             count: launches.length,
-            launches: launches.map(
-                ({
-                    id,
-                    url,
-                    slug,
-                    name,
-                    status_abbrev,
-                    window_start,
-                    launch_service_provider_name,
-                    launch_service_provider_type,
-                    launch_service_provider_country_code,
-                    rocket_configuration_family,
-                    mission_name,
-                    mission_description,
-                    pad_url,
-                    pad_name,
-                    pad_wiki_url,
-                    pad_map_url,
-                    pad_location_name,
-                    pad_location_country_code,
-                }) => ({
-                    id,
-                    url,
-                    slug,
-                    name,
-                    status_abbrev,
-                    window_start,
-                    launch_service_provider_name,
-                    launch_service_provider_type,
-                    launch_service_provider_country_code,
-                    rocket_configuration_family,
-                    mission_name,
-                    mission_description,
-                    pad_url,
-                    pad_name,
-                    pad_wiki_url,
-                    pad_map_url,
-                    pad_location_name,
-                    pad_location_country_code,
-                }),
-            ),
+            launches: launchesByYear,
         });
     } catch (err) {
         next(err);

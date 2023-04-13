@@ -55,6 +55,27 @@ export type Launch = {
     agency_launch_attempt_count_year: number;
 };
 
+export type LaunchShort = {
+    id: string;
+    url: string;
+    slug: string;
+    name: string;
+    status_abbrev: string;
+    window_start: string;
+    launch_service_provider_name: string;
+    launch_service_provider_type: string;
+    launch_service_provider_country_code: string;
+    rocket_configuration_family: string;
+    mission_name: string;
+    mission_description: string;
+    pad_url: string;
+    pad_name: string;
+    pad_wiki_url: string;
+    pad_map_url: string;
+    pad_location_name: string;
+    pad_location_country_code: string;
+};
+
 export type Status = {
     id: number;
     name: string;
