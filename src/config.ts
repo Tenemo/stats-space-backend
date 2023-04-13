@@ -21,7 +21,7 @@ const configSchema = Joi.object({
     NODE_ENV: Joi.string()
         .allow('development', 'production')
         .default('production'),
-    PORT: Joi.number().default(8080),
+    PORT: Joi.number().default(4000),
     driver: Joi.string(),
     database: Joi.string()
         .default('stats-space-db')
@@ -45,7 +45,7 @@ export const config: {
     postgres: DatabaseConfig;
 } = {
     env: process.env.NODE_ENV as string, // Joi sets defaults
-    port: parseInt(process.env.PORT ?? '8080', 10),
+    port: parseInt(process.env.PORT ?? '4000', 10),
     postgres: {
         database: databaseConfig.database,
         port: databaseConfig.port,
