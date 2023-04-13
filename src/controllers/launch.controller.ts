@@ -41,7 +41,50 @@ export const getLaunches = async (
             where: whereConditions,
         });
 
-        res.json({ count: launches.length, launches });
+        res.json({
+            count: launches.length,
+            launches: launches.map(
+                ({
+                    id,
+                    url,
+                    slug,
+                    name,
+                    status_abbrev,
+                    window_start,
+                    launch_service_provider_name,
+                    launch_service_provider_type,
+                    launch_service_provider_country_code,
+                    rocket_configuration_family,
+                    mission_name,
+                    mission_description,
+                    pad_url,
+                    pad_name,
+                    pad_wiki_url,
+                    pad_map_url,
+                    pad_location_name,
+                    pad_location_country_code,
+                }) => ({
+                    id,
+                    url,
+                    slug,
+                    name,
+                    status_abbrev,
+                    window_start,
+                    launch_service_provider_name,
+                    launch_service_provider_type,
+                    launch_service_provider_country_code,
+                    rocket_configuration_family,
+                    mission_name,
+                    mission_description,
+                    pad_url,
+                    pad_name,
+                    pad_wiki_url,
+                    pad_map_url,
+                    pad_location_name,
+                    pad_location_country_code,
+                }),
+            ),
+        });
     } catch (err) {
         next(err);
     }

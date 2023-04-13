@@ -1,4 +1,4 @@
-import express, { ErrorRequestHandler } from 'express';
+import express from 'express';
 import cookieParser from 'cookie-parser';
 import { router } from 'routes/router';
 import { config } from './config';
@@ -24,13 +24,11 @@ app.use('/api', router);
 app.use(sentryErrorHandler);
 
 // Optional fallthrough error handler
-const onErrorSentry: ErrorRequestHandler = (_err, _req, res) => {
+app.use(function onError(_req, res) {
     res.statusCode = 500;
     // @ts-ignore
-    res.end((res.sentry as string) + '\n');
-};
-
-app.use(onErrorSentry);
+    res.end(`${res?.sentry as string} + \n`);
+});
 
 // express-winston errorLogger AFTER the router and AFTER sentry.
 app.use(errorLogger);

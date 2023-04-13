@@ -2,10 +2,4 @@
 
 Backend for [stats.space](https://stats.space)
 
-### Deployment
-
-Heroku
-
-### Error logging
-
-Sentry.io
+Deployed to Heroku, using Heroku PostgreSQL. Local development with Docker. Error logging with Sentry.io.
