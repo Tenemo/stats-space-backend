@@ -6,7 +6,7 @@ import { launch } from 'database';
 import countryCodes from 'data/country_codes.json';
 
 const countryCodesMap: Record<string, string> = countryCodes.reduce(
-    (acc, { name, countryCode }) => ({ ...acc, [countryCode]: name }),
+    (acc, { name, alpha3 }) => ({ ...acc, [alpha3]: name }),
     {},
 );
 
