@@ -18,7 +18,7 @@
     "scripts": {
         "start": "node dist/server.js",
         "prebuild": "npm run eslint:fix && npm run tsc && npm test && npm run cleanDist",
-        "build": "cross-env NODE_ENV=production babel --extensions '.ts' src --out-dir dist",
+        "build": "cross-env NODE_ENV=production babel --extensions '.ts' src --out-dir dist && copyfiles -f src/data/*.json dist/data",
         "build:skip": "npm run cleanDist && cross-env NODE_ENV=production babel --extensions '.ts' src --out-dir dist",
         "cleanDist": "rimraf ./dist && mkdir dist",
         "nodemon": "nodemon",
@@ -76,6 +76,7 @@
         "@typescript-eslint/parser": "^5.58.0",
         "babel-jest": "^29.5.0",
         "babel-plugin-module-resolver": "^5.0.0",
+        "copyfiles": "^2.4.1",
         "core-js": "^3.30.0",
         "eslint": "^8.38.0",
         "eslint-config-prettier": "^8.8.0",

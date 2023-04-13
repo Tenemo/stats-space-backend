@@ -26,6 +26,7 @@
     "cSpell.ignorePaths": ["node_modules", ".git"],
     "cSpell.words": [
         "coenraad",
+        "copyfiles",
         "dbaeumer",
         "eamodio",
         "esbenp",
