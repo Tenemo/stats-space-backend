@@ -7,6 +7,7 @@ import {
 } from 'sequelize';
 
 import { Launch, LaunchServiceProvider } from 'typings/space';
+import spaceDataJSON from 'data/space_data.json';
 export class LaunchModel extends Model<
     InferAttributes<LaunchModel>,
     InferCreationAttributes<LaunchModel>
@@ -177,8 +178,7 @@ export const insertLaunches = async (
     try {
         console.log('Inserting launch data...');
         const startTime = performance.now();
-        const spaceData: SpaceData = (await import('data/space_data.json'))
-            .default as SpaceData;
+        const spaceData: SpaceData = spaceDataJSON as SpaceData;
         const { launchData, launchServiceProviders } = spaceData;
         const launchServiceProvidersMap: Record<number, LaunchServiceProvider> =
             launchServiceProviders.reduce(
