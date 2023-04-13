@@ -14,7 +14,8 @@ type DatabaseConfig = {
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const databaseConfig: DatabaseConfig = parseDbUrl(
-    process.env.DATABASE_URL,
+    process.env.DATABASE_URL ??
+        'postgres://postgres:postgres@localhost:5432/stats-space-db',
 ) as DatabaseConfig;
 
 const configSchema = Joi.object({
