@@ -11,11 +11,13 @@ type DatabaseConfig = {
     user: string;
     password: string;
 };
-
+let databaseUrl = process.env.DATABASE_URL;
+if (!databaseUrl || databaseUrl === '' || databaseUrl === 'undefined') {
+    databaseUrl = 'postgres://postgres:postgres@localhost:5432/stats-space-db';
+}
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const databaseConfig: DatabaseConfig = parseDbUrl(
-    process.env.DATABASE_URL ??
-        'postgres://postgres:postgres@localhost:5432/stats-space-db',
+    databaseUrl,
 ) as DatabaseConfig;
 
 const configSchema = Joi.object({
